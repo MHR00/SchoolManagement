@@ -67,8 +67,13 @@
     <Build Include="dbo\StoredProcedures\spStudent_Delete.sql" />
     <Build Include="dbo\StoredProcedures\spStudent_Insert.sql" />
     <Build Include="dbo\StoredProcedures\spStudent_Update.sql" />
+    <Build Include="dbo\Tables\Teacher.sql" />
+    <Build Include="dbo\Tables\Course.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassManagmentDB.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="ClassManagmentDB.refactorlog" />
   </ItemGroup>
 </Project>
