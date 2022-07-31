@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagement_Model", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagement_Logic", "SchoolManagement_Logic\SchoolManagement_Logic.csproj", "{DD4CC885-683B-4F92-828F-3A3087BC1398}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagement_Unit", "SchoolManagement_Unit\SchoolManagement_Unit.csproj", "{5E748614-A1E3-4702-8004-80A0487D3079}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagement_Util", "SchoolManagement_Unit\SchoolManagement_Util.csproj", "{5E748614-A1E3-4702-8004-80A0487D3079}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagementAPI", "SchoolManagementAPI\SchoolManagementAPI.csproj", "{DC3DEFEA-1617-47C7-BAB8-8B2BA95F4C0A}"
 EndProject

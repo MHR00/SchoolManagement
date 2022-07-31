@@ -7,5 +7,5 @@
 AS
 begin
 		insert into dbo.[Student] (FirstName, LastName, NationalCode , Mobile,RegisterDate)
-		values (@FirstName,@LastName,@NationalCode,@Mobile,@RegisterDate);
+		values (@FirstName,@LastName,@NationalCode,@Mobile,GETDATE());
 end
