@@ -1,8 +1,8 @@
 ﻿CREATE PROCEDURE [dbo].[spStudent_Insert]
 	@FirstName nvarchar(50),
 	@LastName nvarchar(50),
-	@NationalCode int,
-	@Mobile int,
+	@NationalCode bigint,
+	@Mobile bigint,
 	@RegisterDate DATETIME2
 AS
 begin

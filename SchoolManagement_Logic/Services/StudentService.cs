@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement_Logic.Services
 {
-    
 
-    public class UserService
+
+    public class StudentService : IStudentService
     {
         private readonly ISqlDataAccess _db;
-        public UserService(ISqlDataAccess db)
+        public StudentService(ISqlDataAccess db)
         {
             _db = db;
         }
@@ -30,10 +30,15 @@ namespace SchoolManagement_Logic.Services
             return results.FirstOrDefault();
         }
 
-        public Task InsertStudent(StudentModel student)=>
-            _db.SaveData("dbo.spStudent_Insert" , new { 
-                student.FirstName , student.LastName,
-                student.NationalCode , student.Mobile,student.RegisterDate });
+        public Task InsertStudent(StudentModel student) =>
+            _db.SaveData("dbo.spStudent_Insert", new
+            {
+                student.FirstName,
+                student.LastName,
+                student.NationalCode,
+                student.Mobile,
+                student.RegisterDate
+            });
 
         public Task UpdateStudent(StudentModel student) =>
             _db.SaveData("dbo.spStudent_Update", student);
