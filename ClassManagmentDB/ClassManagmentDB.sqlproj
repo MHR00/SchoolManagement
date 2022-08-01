@@ -70,6 +70,9 @@
     <Build Include="dbo\Tables\Teacher.sql" />
     <Build Include="dbo\Tables\Course.sql" />
     <Build Include="dbo\StoredProcedures\spTeacher_GetAll.sql" />
+    <Build Include="dbo\Tables\TeachersCourse.sql" />
+    <Build Include="dbo\Tables\StudentsCourse.sql" />
+    <Build Include="dbo\Tables\StudentsTeacher.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassManagmentDB.publish.xml" />

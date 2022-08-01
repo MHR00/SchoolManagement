@@ -5,6 +5,7 @@
     [LastName] NVARCHAR(50) NOT NULL, 
     [NationalCode] BIGINT NOT NULL, 
     [Mobile] BIGINT NOT NULL, 
-    [RegisterDate] DATETIME2 NOT NULL DEFAULT GETDATE()
+    [RegisterDate] DATETIME2 NOT NULL DEFAULT GETDATE(), 
+
 	
 )
