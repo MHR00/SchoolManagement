@@ -45,6 +45,24 @@ namespace SchoolManagement_Logic.Services
 
         public Task DeleteStudent(int id) =>
             _db.SaveData("dbo.spStudent_Delete", new { Id = id });
+
+        public async Task<StudentCourseModel?> GetStudentsCourse(int id)
+        {
+            var results = await _db.LoadData<StudentCourseModel, dynamic>(
+                "dbo.spStudentsCourse_Get",
+                new { Id = id });
+            return results.FirstOrDefault();
+        }
+
+        public async Task<IEnumerable<StudentsTeachersModel?>> GetStudentsTeachers(int id)
+        {
+            var results = await _db.LoadData<StudentsTeachersModel, dynamic>(
+                "dbo.spStudentsTeacher_Get",
+                new { Id = id });
+            return results.ToList();
+        }
+
+
     }
 
 

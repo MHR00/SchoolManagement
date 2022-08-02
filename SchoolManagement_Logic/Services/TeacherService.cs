@@ -11,12 +11,40 @@ namespace SchoolManagement_Logic.Services
 {
     public class TeacherService
     {
-        private readonly IConnection _db;
-        public TeacherService(IConnection db)
+        private readonly ISqlDataAccess _db;
+        public TeacherService(ISqlDataAccess db)
         {
             _db = db;
         }
-        
-            
+
+        public Task<IEnumerable<TeacherModel>> GetTeachers() =>
+            _db.LoadData<TeacherModel, dynamic>("dbo.spTeacher_GetAll", new { });
+
+
+        public async Task<TeacherModel?> GetTeacher(int id)
+        {
+            var results = await _db.LoadData<TeacherModel, dynamic>(
+                "dbo.spTeacher_Get",
+                new { Id = id });
+            return results.FirstOrDefault();
+        }
+
+        public Task InsertTeacher(TeacherModel teacher) =>
+            _db.SaveData("dbo.spTeacher_Insert", new
+            {
+                teacher.FirstName,
+                teacher.LastName,
+                teacher.NationalCode,
+                teacher.Age,
+                teacher.Mobile
+            });
+
+        public Task UpdateTeacher(TeacherModel teacher) =>
+            _db.SaveData("dbo.spTeacher_Update", teacher);
+
+        public Task DeleteTeacher(int id) =>
+            _db.SaveData("dbo.spTeacher_Delete", new { Id = id });
+
+
     }
 }

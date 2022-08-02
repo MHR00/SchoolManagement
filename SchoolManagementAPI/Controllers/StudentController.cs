@@ -9,11 +9,11 @@ namespace SchoolManagementAPI.Controllers
     public class StudentController : ControllerBase
     {
         private readonly IStudentService _studentService;
-        private readonly ISqlDataAccess _db;
-        public StudentController(IStudentService studentService, ISqlDataAccess db)
+       
+        public StudentController(IStudentService studentService, )
         {
             _studentService = studentService;
-            _db = db;
+           
         }
 
         [HttpGet]
@@ -30,21 +30,21 @@ namespace SchoolManagementAPI.Controllers
             }
         }
 
-        //[HttpGet("{id}")]
-        //public async Task<IResult> GetStudent(int id)
-        //{
-        //    try
-        //    {
-        //        var results = await _studentService.GetStudent(id);
-        //        if (results == null) return Results.NotFound();
-        //        return Results.Ok(results);
-        //    }
-        //    catch (Exception ex)
-        //    {
+        [HttpGet("{id}")]
+        public async Task<IResult> GetStudent(int id)
+        {
+            try
+            {
+                var results = await _studentService.GetStudent(id);
+                if (results == null) return Results.NotFound();
+                return Results.Ok(results);
+            }
+            catch (Exception ex)
+            {
 
-        //        return Results.Problem(ex.Message);
-        //    }
-        //}
+                return Results.Problem(ex.Message);
+            }
+        }
 
         [HttpPost]
         public async Task<IResult> InsertStudent(StudentModel student)
@@ -90,14 +90,50 @@ namespace SchoolManagementAPI.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        public async Task<StudentModel?> GetStudentsCourse(int id)
+        [HttpGet("{studentId}/getstudentcourse")]
+        public async Task<IResult> GetStudentCourse(int studentId)
         {
-            var results = await _db.LoadData<StudentModel, dynamic>(
-                "dbo.spStudentsCourse_Get",
+            try
+            {
+                var results = await _studentService.GetStudentsCourse(studentId);
+                if (results == null) return Results.NotFound();
+                return Results.Ok(results);
+            }
+            catch (Exception ex)
+            {
+
+                return Results.Problem(ex.Message);
+            }
+        }
+
+        [HttpGet("{id}/getTotalTuition")]
+
+        public async Task<StudentsTotalTuitionModel?> GetTotalTuition(int id)
+        {
+            var results = await _db.LoadData<StudentsTotalTuitionModel, dynamic>(
+                "dbo.spStudentsTotalTuition_Get",
                 new { Id = id });
             return results.FirstOrDefault();
         }
+
+
+        [HttpGet("{studentId}/getStudentsTeachers")]
+        public async Task<IResult> GetStudentsTeachers(int studentId)
+        {
+            try
+            {
+                var results = await _studentService.GetStudentsTeachers(studentId);
+                if (results == null) return Results.NotFound();
+                return Results.Ok(results);
+            }
+            catch (Exception ex)
+            {
+
+                return Results.Problem(ex.Message);
+            }
+        }
+
+
 
 
 
