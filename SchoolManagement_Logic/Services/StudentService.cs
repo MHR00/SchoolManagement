@@ -46,4 +46,6 @@ namespace SchoolManagement_Logic.Services
         public Task DeleteStudent(int id) =>
             _db.SaveData("dbo.spStudent_Delete", new { Id = id });
     }
+
+
 }
