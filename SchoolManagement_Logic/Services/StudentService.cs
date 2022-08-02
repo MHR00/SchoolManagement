@@ -40,6 +40,7 @@ namespace SchoolManagement_Logic.Services
                 student.RegisterDate
             });
 
+
         public Task UpdateStudent(StudentModel student) =>
             _db.SaveData("dbo.spStudent_Update", student);
 
