@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement_Logic.Services
 {
-    public class TeacherService
+    public class TeacherService : ITeacherService
     {
         private readonly ISqlDataAccess _db;
         public TeacherService(ISqlDataAccess db)
@@ -45,6 +45,13 @@ namespace SchoolManagement_Logic.Services
         public Task DeleteTeacher(int id) =>
             _db.SaveData("dbo.spTeacher_Delete", new { Id = id });
 
+        public async Task<IEnumerable<TeachersStudentsModel?>> GetTeachersStudents(int id)
+        {
+            var results = await _db.LoadData<TeachersStudentsModel, dynamic>(
+                "dbo.spTeachersStudents_Get",
+                new { Id = id });
+            return results.ToList();
+        }
 
     }
 }

@@ -10,7 +10,7 @@ namespace SchoolManagementAPI.Controllers
     {
         private readonly IStudentService _studentService;
        
-        public StudentController(IStudentService studentService, )
+        public StudentController(IStudentService studentService)
         {
             _studentService = studentService;
            
@@ -76,7 +76,7 @@ namespace SchoolManagementAPI.Controllers
             }
         }
         [HttpDelete]
-        public async Task<IResult> DeleteStudetn(int id)
+        public async Task<IResult> DeleteStudent(int id)
         {
             try
             {
@@ -108,13 +108,13 @@ namespace SchoolManagementAPI.Controllers
 
         [HttpGet("{id}/getTotalTuition")]
 
-        public async Task<StudentsTotalTuitionModel?> GetTotalTuition(int id)
-        {
-            var results = await _db.LoadData<StudentsTotalTuitionModel, dynamic>(
-                "dbo.spStudentsTotalTuition_Get",
-                new { Id = id });
-            return results.FirstOrDefault();
-        }
+        //public async Task<StudentsTotalTuitionModel?> GetTotalTuition(int id)
+        //{
+        //    var results = await _db.LoadData<StudentsTotalTuitionModel, dynamic>(
+        //        "dbo.spStudentsTotalTuition_Get",
+        //        new { Id = id });
+        //    return results.FirstOrDefault();
+        //}
 
 
         [HttpGet("{studentId}/getStudentsTeachers")]
