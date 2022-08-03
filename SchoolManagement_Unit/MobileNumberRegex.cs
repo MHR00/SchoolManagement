@@ -5,9 +5,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace SchoolManagement_Logic
+namespace SchoolManagement_Util
 {
-    public class MobileNumberRegex
+    public static class MobileNumberRegex
     {
         public static bool IsValidPhone(string Phone)
         {

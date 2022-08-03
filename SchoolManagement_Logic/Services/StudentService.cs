@@ -31,29 +31,17 @@ namespace SchoolManagement_Logic.Services
             return results.FirstOrDefault();
         }
 
-        //public Task InsertStudent(StudentModel student) =>
-        //    _db.SaveData("dbo.spStudent_Insert", new
-        //    {
-        //        student.FirstName,
-        //        student.LastName,
-        //        student.NationalCode,
-        //        student.Mobile,
-        //        student.RegisterDate
-        //    });
-
-        public Task InsertStudent(StudentModel student) {
-            
-            var result = _db.SaveData("dbo.spStudent_Insert", new
+        public Task InsertStudent(StudentCreateModel student) =>
+            _db.SaveData("dbo.spStudent_Insert", new
             {
                 student.FirstName,
                 student.LastName,
                 student.NationalCode,
                 student.Mobile,
-                student.RegisterDate
+
             });
-            
-            return result;
-        }
+
+
 
 
         public Task UpdateStudent(StudentModel student) =>
@@ -78,21 +66,16 @@ namespace SchoolManagement_Logic.Services
             return results.ToList();
         }
 
-
-        public static bool IsValidPhone(string Phone)
+        public async Task<StudentsTotalTuitionModel> GetTotalTuition(int studentId)
         {
-            try
-            {
-                if (string.IsNullOrEmpty(Phone))
-                    return false;
-                var r = new Regex(@"^(?:0|98|\+98|\+980|0098|098|00980)?(9\d{9})$");
-                return r.IsMatch(Phone);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var results = await _db.LoadData<StudentsTotalTuitionModel, dynamic>(
+                "dbo.spStudentsTotalTuition_Get",
+                new { Id = studentId });
+            return results.FirstOrDefault();
         }
+
+
+
 
 
     }

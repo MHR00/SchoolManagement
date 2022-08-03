@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SchoolManagement_Model.Models;
+using SchoolManagement_Util;
 using System.Data;
 
 namespace SchoolManagementAPI.Controllers
@@ -10,11 +11,9 @@ namespace SchoolManagementAPI.Controllers
     public class StudentController : ControllerBase
     {
         private readonly IStudentService _studentService;
-        private readonly ISqlDataAccess _db;
-        public StudentController(IStudentService studentService, ISqlDataAccess db)
+        public StudentController(IStudentService studentService)
         {
             _studentService = studentService;
-            _db = db;
         }
 
         [HttpGet]
@@ -48,12 +47,16 @@ namespace SchoolManagementAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IResult> InsertStudent(StudentModel student)
+        public async Task<IResult> InsertStudent(StudentCreateModel student)
         {
             try
             {
-                await _studentService.InsertStudent(student);
-                return Results.Ok();
+                if (MobileNumberRegex.IsValidPhone(student.Mobile))
+                {
+                    await _studentService.InsertStudent(student);
+                    return Results.Ok();
+                }
+                else return Results.BadRequest();
             }
             catch (Exception ex)
             {
@@ -124,12 +127,19 @@ namespace SchoolManagementAPI.Controllers
         }
 
         [HttpGet("{studentId}/getTotalTuition")]
-        public async Task<StudentsTotalTuitionModel> GetTotalTuition(int studentId)
+      public async Task<IResult> GetTotalTuition(int studentId)
         {
-            var results = await _db.LoadData<StudentsTotalTuitionModel, dynamic>(
-                "dbo.spStudentsTotalTuition_Get",
-                new { Id = studentId , total =  SqlDbType.Int });
-            return results.FirstOrDefault();
+            try
+            {
+                var results = await _studentService.GetTotalTuition(studentId);
+                if(results == null) return Results.NotFound();
+                return Results.Ok(results);
+            }
+            catch (Exception ex)
+            {
+
+                return Results.Problem(ex.Message);
+            }
         }
 
 

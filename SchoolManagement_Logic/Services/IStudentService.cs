@@ -6,11 +6,14 @@ namespace SchoolManagement_Logic.Services
     {
         Task DeleteStudent(int id);
         Task<StudentModel?> GetStudent(int id);
+     
         Task<IEnumerable<StudentModel>> GetStudents();
-        Task InsertStudent(StudentModel student);
+        Task InsertStudent(StudentCreateModel student);
         Task UpdateStudent(StudentModel student);
 
         Task<StudentCourseModel?> GetStudentsCourse(int id);
         Task<IEnumerable<StudentsTeachersModel?>> GetStudentsTeachers(int id);
+
+        Task<StudentsTotalTuitionModel> GetTotalTuition(int studentId);
     }
 }
