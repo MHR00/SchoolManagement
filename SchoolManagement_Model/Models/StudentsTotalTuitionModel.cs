@@ -8,6 +8,8 @@ namespace SchoolManagement_Model.Models
 {
     public class StudentsTotalTuitionModel
     {
-        public long TotalPrice { get; set; }
+      
+        public int TotalPrice { get; set; }
+        
     }
 }

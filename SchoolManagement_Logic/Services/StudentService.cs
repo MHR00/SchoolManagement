@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SchoolManagement_Logic.Services
@@ -30,8 +31,19 @@ namespace SchoolManagement_Logic.Services
             return results.FirstOrDefault();
         }
 
-        public Task InsertStudent(StudentModel student) =>
-            _db.SaveData("dbo.spStudent_Insert", new
+        //public Task InsertStudent(StudentModel student) =>
+        //    _db.SaveData("dbo.spStudent_Insert", new
+        //    {
+        //        student.FirstName,
+        //        student.LastName,
+        //        student.NationalCode,
+        //        student.Mobile,
+        //        student.RegisterDate
+        //    });
+
+        public Task InsertStudent(StudentModel student) {
+            
+            var result = _db.SaveData("dbo.spStudent_Insert", new
             {
                 student.FirstName,
                 student.LastName,
@@ -39,6 +51,9 @@ namespace SchoolManagement_Logic.Services
                 student.Mobile,
                 student.RegisterDate
             });
+            
+            return result;
+        }
 
 
         public Task UpdateStudent(StudentModel student) =>
@@ -61,6 +76,22 @@ namespace SchoolManagement_Logic.Services
                 "dbo.spStudentsTeacher_Get",
                 new { Id = id });
             return results.ToList();
+        }
+
+
+        public static bool IsValidPhone(string Phone)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(Phone))
+                    return false;
+                var r = new Regex(@"^(?:0|98|\+98|\+980|0098|098|00980)?(9\d{9})$");
+                return r.IsMatch(Phone);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
 

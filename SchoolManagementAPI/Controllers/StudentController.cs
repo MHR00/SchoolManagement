@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SchoolManagement_Model.Models;
+using System.Data;
 
 namespace SchoolManagementAPI.Controllers
 {
@@ -9,11 +10,11 @@ namespace SchoolManagementAPI.Controllers
     public class StudentController : ControllerBase
     {
         private readonly IStudentService _studentService;
-       
-        public StudentController(IStudentService studentService)
+        private readonly ISqlDataAccess _db;
+        public StudentController(IStudentService studentService, ISqlDataAccess db)
         {
             _studentService = studentService;
-           
+            _db = db;
         }
 
         [HttpGet]
@@ -106,17 +107,6 @@ namespace SchoolManagementAPI.Controllers
             }
         }
 
-        [HttpGet("{id}/getTotalTuition")]
-
-        //public async Task<StudentsTotalTuitionModel?> GetTotalTuition(int id)
-        //{
-        //    var results = await _db.LoadData<StudentsTotalTuitionModel, dynamic>(
-        //        "dbo.spStudentsTotalTuition_Get",
-        //        new { Id = id });
-        //    return results.FirstOrDefault();
-        //}
-
-
         [HttpGet("{studentId}/getStudentsTeachers")]
         public async Task<IResult> GetStudentsTeachers(int studentId)
         {
@@ -131,6 +121,15 @@ namespace SchoolManagementAPI.Controllers
 
                 return Results.Problem(ex.Message);
             }
+        }
+
+        [HttpGet("{studentId}/getTotalTuition")]
+        public async Task<StudentsTotalTuitionModel> GetTotalTuition(int studentId)
+        {
+            var results = await _db.LoadData<StudentsTotalTuitionModel, dynamic>(
+                "dbo.spStudentsTotalTuition_Get",
+                new { Id = studentId , total =  SqlDbType.Int });
+            return results.FirstOrDefault();
         }
 
 
