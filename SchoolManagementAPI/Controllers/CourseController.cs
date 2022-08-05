@@ -47,7 +47,7 @@ namespace SchoolManagementAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IResult> InsertCourse(CourseModel course)
+        public async Task<IResult> InsertCourse(CourseCreateModel course)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace SchoolManagementAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<IResult> UpdataCourse(CourseModel course)
+        public async Task<IResult> UpdataCourse(CourseUpdateModel course)
         {
             try
             {

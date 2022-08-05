@@ -23,4 +23,13 @@ namespace SchoolManagement_Model.Models
         public long NationalCode { get; set; }
         public string Mobile { get; set; }
     }
+
+    public class StudentUpdateModel
+    {
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public long NationalCode { get; set; }
+        public string Mobile { get; set; }
+    }
 }

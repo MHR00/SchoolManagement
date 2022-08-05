@@ -28,7 +28,7 @@ namespace SchoolManagement_Logic.Services
             return results.FirstOrDefault();
         }
 
-        public Task InsertCourse(CourseModel course) =>
+        public Task InsertCourse(CourseCreateModel course) =>
             _db.SaveData("dbo.spCourse_Insert", new
             {
                 course.Name,
@@ -36,7 +36,7 @@ namespace SchoolManagement_Logic.Services
 
             });
 
-        public Task UpdateCourse(CourseModel course) =>
+        public Task UpdateCourse(CourseUpdateModel course) =>
             _db.SaveData("dbo.spCourse_Update", course);
 
         public Task DeleteCourse(int id) =>

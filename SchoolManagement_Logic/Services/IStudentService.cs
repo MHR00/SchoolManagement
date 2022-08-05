@@ -9,7 +9,7 @@ namespace SchoolManagement_Logic.Services
      
         Task<IEnumerable<StudentModel>> GetStudents();
         Task InsertStudent(StudentCreateModel student);
-        Task UpdateStudent(StudentModel student);
+        Task UpdateStudent(StudentUpdateModel student);
 
         Task<StudentCourseModel?> GetStudentsCourse(int id);
         Task<IEnumerable<StudentsTeachersModel?>> GetStudentsTeachers(int id);

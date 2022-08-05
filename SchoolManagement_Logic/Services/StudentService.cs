@@ -41,10 +41,7 @@ namespace SchoolManagement_Logic.Services
 
             });
 
-
-
-
-        public Task UpdateStudent(StudentModel student) =>
+        public Task UpdateStudent(StudentUpdateModel student) =>
             _db.SaveData("dbo.spStudent_Update", student);
 
         public Task DeleteStudent(int id) =>

@@ -12,4 +12,20 @@ namespace SchoolManagement_Model.Models
         public string Name { get; set; }
         public long Tuition { get; set; }   
     }
+
+    public class CourseCreateModel
+    {
+      
+        public string Name { get; set; }
+        public long Tuition { get; set; }
+    }
+
+    public class CourseUpdateModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public long Tuition { get; set; }
+    }
+
+
 }

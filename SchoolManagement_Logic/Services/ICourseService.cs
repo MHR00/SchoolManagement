@@ -7,7 +7,7 @@ namespace SchoolManagement_Logic.Services
         Task DeleteCourse(int id);
         Task<CourseModel?> GetCourse(int id);
         Task<IEnumerable<CourseModel>> GetCourses();
-        Task InsertCourse(CourseModel course);
-        Task UpdateCourse(CourseModel course);
+        Task InsertCourse(CourseCreateModel course);
+        Task UpdateCourse(CourseUpdateModel course);
     }
 }

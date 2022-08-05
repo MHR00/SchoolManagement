@@ -47,7 +47,7 @@ namespace SchoolManagementAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IResult> InsertTeacher(TeacherModel Teacher)
+        public async Task<IResult> InsertTeacher(TeacherCreateModel Teacher)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace SchoolManagementAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<IResult> UpdataTeacher(TeacherModel Teacher)
+        public async Task<IResult> UpdataTeacher(TeacherUpdateModel Teacher)
         {
             try
             {

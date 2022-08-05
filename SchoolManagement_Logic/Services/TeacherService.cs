@@ -29,7 +29,7 @@ namespace SchoolManagement_Logic.Services
             return results.FirstOrDefault();
         }
 
-        public Task InsertTeacher(TeacherModel teacher) =>
+        public Task InsertTeacher(TeacherCreateModel teacher) =>
             _db.SaveData("dbo.spTeacher_Insert", new
             {
                 teacher.FirstName,
@@ -39,7 +39,7 @@ namespace SchoolManagement_Logic.Services
                 teacher.Mobile
             });
 
-        public Task UpdateTeacher(TeacherModel teacher) =>
+        public Task UpdateTeacher(TeacherUpdateModel teacher) =>
             _db.SaveData("dbo.spTeacher_Update", teacher);
 
         public Task DeleteTeacher(int id) =>

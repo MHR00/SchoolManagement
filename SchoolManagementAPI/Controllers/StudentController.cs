@@ -66,7 +66,7 @@ namespace SchoolManagementAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<IResult> UpdataStudent(StudentModel student)
+        public async Task<IResult> UpdataStudent(StudentUpdateModel student)
         {
             try
             {

@@ -7,8 +7,8 @@ namespace SchoolManagement_Logic.Services
         Task DeleteTeacher(int id);
         Task<TeacherModel?> GetTeacher(int id);
         Task<IEnumerable<TeacherModel>> GetTeachers();
-        Task InsertTeacher(TeacherModel teacher);
-        Task UpdateTeacher(TeacherModel teacher);
+        Task InsertTeacher(TeacherCreateModel teacher);
+        Task UpdateTeacher(TeacherUpdateModel teacher);
         Task<IEnumerable<TeachersStudentsModel?>> GetTeachersStudents(int id);
     }
 }
