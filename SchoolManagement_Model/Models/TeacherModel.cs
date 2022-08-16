@@ -20,9 +20,9 @@ namespace SchoolManagement_Model.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public long NationalCode { get; set; }
+        public string NationalCode { get; set; }
         public int Age { get; set; }
-        public long Mobile { get; set; }
+        public string Mobile { get; set; }
     }
 
     public class TeacherUpdateModel
@@ -32,6 +32,6 @@ namespace SchoolManagement_Model.Models
         public string LastName { get; set; }
         public long NationalCode { get; set; }
         public int Age { get; set; }
-        public long Mobile { get; set; }
+        public string Mobile { get; set; }
     }
 }

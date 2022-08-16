@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SchoolManagement_Model.Models;
+using SchoolManagement_Util;
 
 namespace SchoolManagementAPI.Controllers
 {
@@ -16,19 +17,19 @@ namespace SchoolManagementAPI.Controllers
 
         }
 
-        [HttpGet]
-        public async Task<IResult> GetTeacher()
-        {
-            try
-            {
-                return Results.Ok(await _teacherService.GetTeachers());
-            }
-            catch (Exception ex)
-            {
+        //[HttpGet]
+        //public async Task<IResult> GetTeacher()
+        //{
+        //    try
+        //    {
+        //        return Results.Ok(await _teacherService.GetTeachers());
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                return Results.Problem(ex.Message);
-            }
-        }
+        //        return Results.Problem(ex.Message);
+        //    }
+        //}
 
         [HttpGet("{id}")]
         public async Task<IResult> GetTeacher(int id)
@@ -47,12 +48,16 @@ namespace SchoolManagementAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IResult> InsertTeacher(TeacherCreateModel Teacher)
+        public async Task<IResult> InsertTeacher(TeacherCreateModel teacher)
         {
             try
             {
-                await _teacherService.InsertTeacher(Teacher);
-                return Results.Ok();
+                if (MobileNumberRegex.IsValidPhone(teacher.Mobile)&& (Valid_NationalCodeClass.Valid_NC(teacher.NationalCode)))
+                {
+                    await _teacherService.InsertTeacher(teacher);
+                    return Results.Ok();
+                }
+                else return Results.BadRequest();
             }
             catch (Exception ex)
             {
@@ -60,6 +65,7 @@ namespace SchoolManagementAPI.Controllers
                 return Results.Problem(ex.Message);
             }
         }
+    
 
         [HttpPut]
         public async Task<IResult> UpdataTeacher(TeacherUpdateModel Teacher)
@@ -105,5 +111,13 @@ namespace SchoolManagementAPI.Controllers
                 return Results.Problem(ex.Message);
             }
         }
+
+        [HttpGet]
+        public ActionResult<List<MessagePublishDto>> Get()
+        {
+            return Ok(_teacherService.GetMessages);
+        }
+
+
     }
 }

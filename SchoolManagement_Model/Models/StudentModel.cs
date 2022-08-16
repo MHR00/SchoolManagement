@@ -20,7 +20,7 @@ namespace SchoolManagement_Model.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public long NationalCode { get; set; }
+        public string NationalCode { get; set; }
         public string Mobile { get; set; }
     }
 

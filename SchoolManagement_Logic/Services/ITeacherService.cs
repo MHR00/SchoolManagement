@@ -7,6 +7,8 @@ namespace SchoolManagement_Logic.Services
         Task DeleteTeacher(int id);
         Task<TeacherModel?> GetTeacher(int id);
         Task<IEnumerable<TeacherModel>> GetTeachers();
+        List<MessagePublishDto> GetMessages();
+        MessagePublishDto CreateMessage(MessagePublishDto message);
         Task InsertTeacher(TeacherCreateModel teacher);
         Task UpdateTeacher(TeacherUpdateModel teacher);
         Task<IEnumerable<TeachersStudentsModel?>> GetTeachersStudents(int id);

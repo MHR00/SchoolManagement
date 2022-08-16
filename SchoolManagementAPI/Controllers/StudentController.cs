@@ -51,11 +51,14 @@ namespace SchoolManagementAPI.Controllers
         {
             try
             {
-                if (MobileNumberRegex.IsValidPhone(student.Mobile))
+                if (Valid_NationalCodeClass.Valid_NC(student.NationalCode) && (MobileNumberRegex.IsValidPhone(student.Mobile)))
+                    
                 {
                     await _studentService.InsertStudent(student);
                     return Results.Ok();
                 }
+               
+                
                 else return Results.BadRequest();
             }
             catch (Exception ex)

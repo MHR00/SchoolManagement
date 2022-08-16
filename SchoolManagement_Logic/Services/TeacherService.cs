@@ -12,6 +12,7 @@ namespace SchoolManagement_Logic.Services
     public class TeacherService : ITeacherService
     {
         private readonly ISqlDataAccess _db;
+        public static List<MessagePublishDto> messages = new List<MessagePublishDto>();
         public TeacherService(ISqlDataAccess db)
         {
             _db = db;
@@ -53,5 +54,16 @@ namespace SchoolManagement_Logic.Services
             return results.ToList();
         }
 
+        public List<MessagePublishDto> GetMessages()
+        {
+            return messages;
+        }
+
+        public MessagePublishDto CreateMessage(MessagePublishDto message)
+        {
+            messages.Add(message);
+            return message;
+
+        }
     }
 }
