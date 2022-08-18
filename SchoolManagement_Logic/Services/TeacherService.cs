@@ -1,21 +1,28 @@
-﻿using SchoolManagement_Logic.DbAccesss;
+﻿using Microsoft.Extensions.Configuration;
+using SchoolManagement_Logic.DbAccesss;
 using SchoolManagement_Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SchoolManagement_Logic.Services
 {
     public class TeacherService : ITeacherService
     {
         private readonly ISqlDataAccess _db;
+        private readonly IConfiguration _config;
         public static List<MessagePublishDto> messages = new List<MessagePublishDto>();
-        public TeacherService(ISqlDataAccess db)
+       
+        public TeacherService(ISqlDataAccess db , IConfiguration config)
         {
             _db = db;
+            _config = config;
         }
 
         public Task<IEnumerable<TeacherModel>> GetTeachers() =>
@@ -54,16 +61,21 @@ namespace SchoolManagement_Logic.Services
             return results.ToList();
         }
 
-        public List<MessagePublishDto> GetMessages()
+        public Task CreateMessage(MessagePublishDto message) =>
+
+            _db.SaveData("dbo.spMessage_Insert", message);
+
+        public Task<IEnumerable<MessagePublishDto>> GetMessages() =>
+               _db.LoadData<MessagePublishDto, dynamic>("dbo.spMessage_GetAll", new { });
+
+        public async Task<IEnumerable<MessageByDoctorIdDto?>> GetMessge_ByTeacherId(int id)
         {
-            return messages;
+            var results = await _db.LoadData<MessageByDoctorIdDto, dynamic>(
+                "dbo.spMessage_GetByTeacherId",
+                new { Id = id });
+            return results.ToList();
         }
 
-        public MessagePublishDto CreateMessage(MessagePublishDto message)
-        {
-            messages.Add(message);
-            return message;
 
-        }
     }
 }

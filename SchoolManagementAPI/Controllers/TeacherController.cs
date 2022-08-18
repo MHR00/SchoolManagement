@@ -17,19 +17,19 @@ namespace SchoolManagementAPI.Controllers
 
         }
 
-        //[HttpGet]
-        //public async Task<IResult> GetTeacher()
-        //{
-        //    try
-        //    {
-        //        return Results.Ok(await _teacherService.GetTeachers());
-        //    }
-        //    catch (Exception ex)
-        //    {
+        [HttpGet]
+        public async Task<IResult> GetTeacher()
+        {
+            try
+            {
+                return Results.Ok(await _teacherService.GetTeachers());
+            }
+            catch (Exception ex)
+            {
 
-        //        return Results.Problem(ex.Message);
-        //    }
-        //}
+                return Results.Problem(ex.Message);
+            }
+        }
 
         [HttpGet("{id}")]
         public async Task<IResult> GetTeacher(int id)
@@ -112,10 +112,34 @@ namespace SchoolManagementAPI.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult<List<MessagePublishDto>> Get()
+        [HttpGet("get/message")]
+        public async Task<IResult> GetMessage()
         {
-            return Ok(_teacherService.GetMessages);
+            try
+            {
+                return Results.Ok(await _teacherService.GetMessages());
+            }
+            catch (Exception ex)
+            {
+
+                return Results.Problem(ex.Message);
+            }
+        }
+        [HttpGet("{teacherId}/getMessageByTeacherId")]
+        public async Task<IResult> GetMessageByTeacherId(int teacherId)
+        {
+            try
+            {
+                var result = await _teacherService.GetMessge_ByTeacherId(teacherId);
+                if (result == null) return Results.NotFound();
+                return Results.Ok(result);
+
+            }
+            catch (Exception ex)
+            {
+
+                return Results.Problem(ex.Message);
+            }
         }
 
 

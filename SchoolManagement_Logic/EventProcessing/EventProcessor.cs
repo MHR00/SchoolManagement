@@ -67,6 +67,7 @@ namespace SchoolManagement_Logic.EventProcessing
                 try
                 {
                     var message = _teacherService.CreateMessage(messages);
+                   
                     Console.WriteLine("--> Message added!");
                 }
                 catch (Exception ex)
